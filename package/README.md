@@ -1,5 +1,7 @@
 # PickYourSpirit
 
+!["Next spirit: Moose" while riding a saddled spirit moose, and "Next spirit" on middle mouse in the key hints](https://raw.githubusercontent.com/algo7/PickYourSpirit/main/images/header.jpg)
+
 Wanted a wolf and got a moose again? Equip the **Spirit Caller** and press **middle mouse** to pick who answers your next
 call: bear, moose, wolf, boar, or random like the unmodded game. Nothing to install on the server.
 
@@ -9,6 +11,10 @@ call: bear, moose, wolf, boar, or random like the unmodded game. Nothing to inst
 2. Press **middle mouse** (secondary attack button). The middle of the screen shows who's next, and
    the key hints show **Next spirit**. Keep pressing to go through them all and back to random.
 3. Cast as usual.
+
+![Next spirit: Bear with a spirit bear; Next spirit: Wolf with a spirit wolf](https://raw.githubusercontent.com/algo7/PickYourSpirit/main/images/picks.jpg)
+
+![Next spirit: Random while casting: the game picks the spirit, like without the mod](https://raw.githubusercontent.com/algo7/PickYourSpirit/main/images/random.jpg)
 
 ## Same Rules as the Game
 
