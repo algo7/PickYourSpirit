@@ -75,6 +75,26 @@ internal static partial class Tests
         Eq("Next spirit: $spiritcaller_wolf", SpiritRules.Message("$spiritcaller_wolf"), "the game's token, localized by the message HUD");
     }
 
+    private static void Test_AnimalOf_DropsTheSpiritEnding()
+    {
+        Eq("Wolf", SpiritRules.AnimalOf("Wolf_spiritcaller"), "wolf");
+        Eq("Bjorn", SpiritRules.AnimalOf("Bjorn_spiritcaller"), "the bear's prefab is Bjorn");
+        Eq("Troll", SpiritRules.AnimalOf("Troll"), "no ending: as is");
+        Eq("_spiritcaller", SpiritRules.AnimalOf("_spiritcaller"), "nothing left: as is");
+        Eq(null, SpiritRules.AnimalOf(null), "no name");
+    }
+
+    private static void Test_FirstName_SkipsTheGamesEmptySpiritNames()
+    {
+        // In-game bug 2026-10-07 ("Next spirit:" with no name): the game's $spiritcaller_* texts are empty in all 36
+        // languages (the game's localization table), so the message falls back to the animal's own name ($enemy_wolf = "Wolf").
+        Eq("Bear", SpiritRules.FirstName("", "Bear", "Bjorn"), "spirit's name empty: the animal's");
+        Eq("Wolf", SpiritRules.FirstName("[spiritcaller_wolf]", "Wolf", "Wolf"), "a missing text shows as [key]: skipped");
+        Eq("Spirit wolf", SpiritRules.FirstName("Spirit wolf", "Wolf", "Wolf"), "if the game ever names the spirit: that");
+        Eq("Bjorn", SpiritRules.FirstName("", " ", "Bjorn"), "no names at all: the prefab's");
+        Eq(null, SpiritRules.FirstName("", null), "nothing usable");
+    }
+
     private static void Test_Hint_LabelsMatchTheGame()
     {
         // The game's own strings (KeyHintsBase.prefab): restored after the staff is put away.

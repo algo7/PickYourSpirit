@@ -57,6 +57,8 @@ internal static partial class Tests
         Field(typeof(ItemDrop.ItemData.SharedData), "m_attack", typeof(Attack));
         Field(typeof(Attack), "m_attackProjectile", typeof(GameObject));
         Field(typeof(Character), "m_name", typeof(string));
+        // The message's fallback name: the animal a spirit is made from (Wolf_spiritcaller → Wolf).
+        Eq(typeof(GameObject), typeof(ZNetScene).GetMethod("GetPrefab", new[] { typeof(string) })?.ReturnType, "ZNetScene.GetPrefab(string)");
     }
 
     private static void Test_Game_TheMessageAndHint()

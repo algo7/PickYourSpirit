@@ -54,6 +54,32 @@ namespace PickYourSpirit
         /// <summary>The centre message. spirit: the spirit's name as the game has it ($token or plain), null for Random.</summary>
         public static string Message(string spirit) => $"{HintLabel}: {spirit ?? "Random"}";
 
+        private const string SpiritEnding = "_spiritcaller";
+
+        /// <summary>The creature a spirit is made from: its prefab name without "_spiritcaller" (Wolf_spiritcaller → Wolf).</summary>
+        public static string AnimalOf(string spiritPrefab)
+        {
+            if (spiritPrefab == null || spiritPrefab.Length <= SpiritEnding.Length) return spiritPrefab;
+            return spiritPrefab.EndsWith(SpiritEnding, StringComparison.OrdinalIgnoreCase)
+                ? spiritPrefab.Substring(0, spiritPrefab.Length - SpiritEnding.Length)
+                : spiritPrefab;
+        }
+
+        /// <summary>
+        /// The first usable name, trimmed. The game's own spirit names ($spiritcaller_*) are empty in every language, and a
+        /// missing text shows as [key], so callers pass the spirit's name, then its animal's, then the prefab's.
+        /// </summary>
+        public static string FirstName(params string[] names)
+        {
+            foreach (var name in names)
+            {
+                var n = name?.Trim();
+                if (string.IsNullOrEmpty(n) || (n.StartsWith("[", StringComparison.Ordinal) && n.EndsWith("]", StringComparison.Ordinal))) continue;
+                return n;
+            }
+            return null;
+        }
+
         private static int IndexOf(IReadOnlyList<string> names, string name)
         {
             for (var i = 0; i < names.Count; i++)

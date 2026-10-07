@@ -52,17 +52,31 @@ namespace PickYourSpirit
             MessageHud.instance.ShowMessage(MessageHud.MessageType.Center, SpiritRules.Message(ShownName(list, Pick)), log: false);
         }
 
-        /// <summary>The picked spirit's name as the game has it (a $token the message localizes), or its prefab name.</summary>
+        /// <summary>
+        /// The picked spirit's name in the player's language. The game leaves the spirits' own names empty, so this falls
+        /// back to the animal it's made from (Wolf_spiritcaller → the Wolf's "$enemy_wolf"), then the prefab name.
+        /// </summary>
         private static string ShownName(GameObject[] list, string pick)
         {
             if (pick == null) return null;
+            var own = "";
             foreach (var prefab in list)
             {
                 if (prefab == null || prefab.name != pick) continue;
-                var character = prefab.GetComponent<Character>();
-                return character != null && !string.IsNullOrEmpty(character.m_name) ? character.m_name : pick;
+                own = NameOf(prefab);
+                break;
             }
-            return pick;
+            var animal = SpiritRules.AnimalOf(pick);
+            var animalName = ZNetScene.instance != null ? NameOf(ZNetScene.instance.GetPrefab(animal)) : "";
+            return SpiritRules.FirstName(own, animalName, animal, pick);
+        }
+
+        /// <summary>A creature prefab's name in the player's language, or "" (no prefab, no Character, no name).</summary>
+        private static string NameOf(GameObject prefab)
+        {
+            var character = prefab != null ? prefab.GetComponent<Character>() : null;
+            if (character == null || string.IsNullOrEmpty(character.m_name)) return "";
+            return Localization.instance.Localize(character.m_name);
         }
     }
 }
