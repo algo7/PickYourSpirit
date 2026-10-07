@@ -15,13 +15,31 @@ namespace PickYourSpirit
         private static AccessTools.FieldRef<Character, bool> s_secondaryAttack;
         private static bool s_errorLogged;
 
+        /// <summary>
+        /// Harmony asks this before patching: the press field is looked up once here. If a game update removed it, the
+        /// hook isn't installed at all (one log line) instead of failing on every physics step.
+        /// </summary>
+        private static bool Prepare()
+        {
+            if (s_secondaryAttack != null) return true;
+            try
+            {
+                s_secondaryAttack = AccessTools.FieldRefAccess<Character, bool>("m_secondaryAttack");
+                return true;
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogError($"Middle mouse can't pick spirits: the game's press field wasn't found (a game update?): {e.Message}");
+                return false;
+            }
+        }
+
         [HarmonyPatch(typeof(Player), nameof(Player.SetControls))]
         [HarmonyPostfix]
         private static void SetControls(Player __instance)
         {
             try
             {
-                if (s_secondaryAttack == null) s_secondaryAttack = AccessTools.FieldRefAccess<Character, bool>("m_secondaryAttack");
                 if (__instance != Player.m_localPlayer || !s_secondaryAttack(__instance)) return;
                 var weapon = __instance.GetCurrentWeapon();
                 if (SpiritCaller.IsSpiritCaller(weapon)) SpiritCaller.Press(weapon);
