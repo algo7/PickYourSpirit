@@ -31,6 +31,7 @@ namespace PickYourSpirit
                 return;
             }
             TryPatch(harmony, typeof(ButtonPatches), "middle mouse hook");
+            if (!TryPatch(harmony, typeof(HintPatches), "key hint hook")) Log.LogWarning("No 'Next spirit' key hint (picking still works)");
             SceneManager.sceneLoaded += OnSceneLoaded;
             Log.LogInfo($"{Name} loaded (v{PluginVersion})");
         }
