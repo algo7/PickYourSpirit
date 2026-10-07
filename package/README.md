@@ -2,7 +2,7 @@
 
 !["Next spirit: Moose" while riding a saddled spirit moose, and "Next spirit" on middle mouse in the key hints](https://raw.githubusercontent.com/algo7/PickYourSpirit/main/images/header.jpg)
 
-Wanted a wolf and got a moose again? Equip the **Spirit Caller** and press **middle mouse** to pick who answers your next
+Wanted a moose and got a wolf again? Equip the **Spirit Caller** and press **middle mouse** to pick who answers your next
 call: bear, moose, wolf, boar, or random like the unmodded game. Nothing to install on the server.
 
 ## How to Use
