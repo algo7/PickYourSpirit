@@ -72,7 +72,7 @@ internal static partial class Tests
     private static void Test_Message_NamesThePick()
     {
         Eq("Next spirit: Random", SpiritRules.Message(null), "Random");
-        Eq("Next spirit: $spiritcaller_wolf", SpiritRules.Message("$spiritcaller_wolf"), "the game's token, localized by the message HUD");
+        Eq("Next spirit: Bear", SpiritRules.Message("Bear"), "the animal's name, already in the player's language");
     }
 
     private static void Test_AnimalOf_DropsTheSpiritEnding()

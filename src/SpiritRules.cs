@@ -51,7 +51,7 @@ namespace PickYourSpirit
             return IndexOf(names, pick);
         }
 
-        /// <summary>The centre message. spirit: the spirit's name as the game has it ($token or plain), null for Random.</summary>
+        /// <summary>The centre message. spirit: the name to show, already in the player's language; null for Random.</summary>
         public static string Message(string spirit) => $"{HintLabel}: {spirit ?? "Random"}";
 
         private const string SpiritEnding = "_spiritcaller";
