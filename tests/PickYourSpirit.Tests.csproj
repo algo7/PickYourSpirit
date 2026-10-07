@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Compile Include="*.cs" />
+    <Compile Include="../src/SpiritRules.cs" />
   </ItemGroup>
 
   <ItemGroup>
