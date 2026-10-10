@@ -43,6 +43,6 @@ Nothing is saved, so just remove it.
 - Available on [Thunderstore](https://thunderstore.io/c/valheim/p/Algo7/PickYourSpirit/) and
   [Hexium](https://valheim.hexium.gg/mods/Algo7/PickYourSpirit)
 - Source and bug reports: https://github.com/algo7/PickYourSpirit (issues welcome)
-- Changes: the Changelog tab
+- Changes: see the changelog
 - Made with AI assistance.
 - Built with [BepInEx](https://github.com/BepInEx/BepInEx) and HarmonyX. MIT license.
