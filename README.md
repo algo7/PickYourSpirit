@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/algo7/PickYourSpirit/actions/workflows/ci.yml/badge.svg)](https://github.com/algo7/PickYourSpirit/actions/workflows/ci.yml)
 [![Thunderstore](https://img.shields.io/badge/Thunderstore-PickYourSpirit-blue)](https://thunderstore.io/c/valheim/p/Algo7/PickYourSpirit/)
+[![Hexium](https://img.shields.io/badge/Hexium-PickYourSpirit-purple)](https://valheim.hexium.gg/mods/Algo7/PickYourSpirit)
 
 A client-side [BepInEx](https://github.com/BepInEx/BepInEx) mod for Valheim: choose which spirit the Spirit Caller
 summons next. Players without the mod only ever see vanilla things.
