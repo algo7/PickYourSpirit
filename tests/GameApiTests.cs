@@ -35,18 +35,12 @@ internal static partial class Tests
     private static void Test_Game_ThePress()
     {
         var setControls = Method(typeof(Player), "SetControls");
-        True(setControls.IsPublic, "Player.SetControls is public (nameof)");
         Param(setControls, "secondaryAttack", typeof(bool));
-        Field(typeof(Character), "m_secondaryAttack", typeof(bool));
         Eq(typeof(ItemDrop.ItemData), typeof(Humanoid).GetMethod("GetCurrentWeapon", Type.EmptyTypes)?.ReturnType, "Humanoid.GetCurrentWeapon()");
     }
 
     private static void Test_Game_TheCast()
     {
-        var setup = Method(typeof(SpawnAbility), "Setup");
-        True(setup.IsPublic, "SpawnAbility.Setup is public (nameof)");
-        Param(setup, "owner", typeof(Character));
-        Param(setup, "item", typeof(ItemDrop.ItemData));
         Field(typeof(SpawnAbility), "m_spawnPrefab", typeof(GameObject[]));
     }
 
@@ -64,7 +58,6 @@ internal static partial class Tests
     private static void Test_Game_TheMessageAndHint()
     {
         Param(Method(typeof(MessageHud), "ShowMessage"), "log", typeof(bool));
-        True(Method(typeof(KeyHints), "UpdateHints").GetParameters().Length == 0, "KeyHints.UpdateHints()");
         Field(typeof(KeyHints), "m_combatHints", typeof(GameObject));
         Field(typeof(KeyHints), "m_secondaryAttackKB", typeof(GameObject));
         Field(typeof(KeyHints), "m_secondaryAttackGP", typeof(GameObject));

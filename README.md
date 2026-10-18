@@ -40,7 +40,7 @@ Needs the .NET SDK (8+) and the game's DLLs (a local Valheim install, or the ded
 
 ```sh
 make build      # bin/Release/PickYourSpirit.dll
-make test       # unit tests: the pick rules, and the game members the patches use
+make test       # builds the plugin, then unit tests: the pick rules, the game members the patches use, and the hook check
 make package    # Algo7-PickYourSpirit-<version>.zip for r2modman's "Import local mod"
 ```
 
@@ -48,9 +48,13 @@ The version comes from the git tag (MinVer).
 
 ## CI / CD
 
-CI builds and tests against the free dedicated server's DLLs (`.github/scripts/valheim-managed.sh`). A `vX.Y.Z` tag
-with a matching `## X.Y.Z` section in `CHANGELOG.md` releases to GitHub, Thunderstore and Hexium after manual
-approval.
+CI builds and tests against the free dedicated server's DLLs (`.github/scripts/valheim-managed.sh`) on every push and
+pull request, and every day at 06:00 UTC (`.github/workflows/daily.yml`, or "Run workflow" in Actions), so a game update
+that breaks a hook turns it red within a day; GitHub switches the daily run off after 60 days without repository
+activity (turn it back on under Actions → Daily check). The hook check (`tests/HookCheck.cs`, in `make test`) reads the
+built DLL and the game DLLs with Mono.Cecil and fails when a Harmony hook's target or parameters, or a member the code
+looks up by name, no longer match the game. A `vX.Y.Z` tag with a matching `## X.Y.Z` section in `CHANGELOG.md`
+releases to GitHub, Thunderstore and Hexium after manual approval.
 
 ## Layout
 
@@ -60,7 +64,7 @@ approval.
 | `src/SpiritRules.cs` | The pick rules (Unity-free, unit tested) |
 | `src/SpiritCaller.cs` | The staff, its spirit list, the pick, the message |
 | `src/CastPatches.cs`, `src/ButtonPatches.cs`, `src/HintPatches.cs` | The three patches |
-| `tests/` | Unit tests (`make test`) |
+| `tests/` | Unit tests and the hook check (`make test`) |
 | `package/` | Mod page (Thunderstore and Hexium) and icon |
 
 ## License
